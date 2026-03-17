@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_CANDIDATES 3
+
+struct Candidate {
+    char name[50];
+    int votes;
+};
+
+struct Candidate candidates[MAX_CANDIDATES] = {
+    {"Alice", 0},
+    {"Bob", 0},
+    {"Charlie", 0}
+};
+
+void displayCandidates() {
+    printf("\nCandidates:\n");
+    for (int i = 0; i < MAX_CANDIDATES; i++) {
+        printf("%d. %s\n", i + 1, candidates[i].name);
+    }
+}
+
+void castVote() {
+    int choice;
+    printf("\nEnter candidate number to vote: ");
+    scanf("%d", &choice);
+
+    if (choice >= 1 && choice <= MAX_CANDIDATES) {
+        candidates[choice - 1].votes++;
+        printf("Vote cast successfully!\n");
+    } else {
+        printf("Invalid choice! Try again.\n");
+    }
+}
+
+void showResults() {
+    printf("\nElection Results:\n");
+    for (int i = 0; i < MAX_CANDIDATES; i++) {
+        printf("%s: %d votes\n", candidates[i].name, candidates[i].votes);
+    }
+}
+
+int main() {
+    int option;
+
+    while (1) {
+        printf("\nE-Voting System\n");
+        printf("1. Display Candidates\n");
+        printf("2. Vote\n");
+        printf("3. Show Results\n");
+        printf("4. Exit\n");
+        printf("Choose an option: ");
+        scanf("%d", &option);
+
+        switch (option) {
+            case 1: displayCandidates(); break;
+            case 2: castVote(); break;
+            case 3: showResults(); break;
+            case 4: printf("Exiting...\n"); return 0;
+            default: printf("Invalid option! Try again.\n");
+        }
+    }
+
+    return 0;
+}
