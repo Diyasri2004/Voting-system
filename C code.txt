@@ -1,0 +1,80 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Define macro
+#define party_no_1 "A"
+#define party_no_2 "B"
+#define party_no_3 "C"
+#define party_no_4 "D"
+
+int vote_Count1 = 0, vote_Count2 = 0, vote_Count3 = 0, vote_Count4 = 0, invalid_votes = 0;
+
+void castVote(){
+    int choice;
+    printf("\n <#> Please choose your Candidate <#> \n\n");
+    printf("\n 1. %s", party_no_1);
+    printf("\n 2. %s", party_no_2);
+    printf("\n 3. %s", party_no_3);
+    printf("\n 4. %s", party_no_4);
+    printf("\n 5. None of the above");
+    printf("\n Input your choice (1 - 4) : ");
+    scanf("%d", &choice);
+    
+    switch (choice){
+        case 1: vote_Count1++; break;
+        case 2: vote_Count2++; break;
+        case 3: vote_Count3++; break;
+        case 4: vote_Count4++; break;
+        case 5: invalid_votes++; break;
+        default:
+            printf("\n Error: Wrong Choice !! Please retry");
+            getchar();
+    }
+    printf("\n Thanks for your vote !!\n");
+}
+
+void votesCount(){
+    printf("\n ##### Voting Statistics #####\n");
+    printf("\n %s - %d", party_no_1, vote_Count1);
+    printf("\n %s - %d", party_no_2, vote_Count2);
+    printf("\n %s - %d", party_no_3, vote_Count3);
+    printf("\n %s - %d", party_no_4, vote_Count4);
+    printf("\n Spoiled Votes - %d", invalid_votes);
+}
+
+void getLeadingCandidate(){
+    printf("\n ##### Leading Candidate #####\n");
+    if(vote_Count1 > vote_Count2 && vote_Count1 > vote_Count3 && vote_Count1 > vote_Count4)
+        printf("The Leading Candidate is %s", party_no_1);
+    else if(vote_Count2 > vote_Count1 && vote_Count2 > vote_Count3 && vote_Count2 > vote_Count4)
+        printf("The Leading Candidate is %s", party_no_2);
+    else if(vote_Count3 > vote_Count1 && vote_Count3 > vote_Count2 && vote_Count3 > vote_Count4)
+        printf("The Leading Candidate is %s", party_no_3);
+    else if(vote_Count4 > vote_Count1 && vote_Count4 > vote_Count2 && vote_Count4 > vote_Count3)
+        printf("The Leading Candidate is %s", party_no_4);
+    else
+        printf("******** No Clear Winner ********");
+}
+
+int main(){
+    int choice;
+    do {
+        printf("\n ##### WELCOME TO ELECTION / VOTING #####\n");
+        printf("\n 1. Cast the Vote.");
+        printf("\n 2. Find the Vote Count.");
+        printf("\n 3. Find the Leading Candidate.");
+        printf("\n 0. Exit.");
+        printf("\n Please Enter Your Choice : ");
+        scanf("%d", &choice);
+        
+        switch(choice){
+            case 1: castVote(); break;
+            case 2: votesCount(); break;
+            case 3: getLeadingCandidate(); break;
+            default: printf("\n Thank you!!");
+        }
+    } while(choice != 0);
+    
+    getchar();
+    return 0;
+}
